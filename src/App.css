@@ -1,0 +1,29 @@
+.navBar {
+  padding: 30px;
+}
+.navBar_list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+/* .navBar_list--item {
+} */
+
+.film_list {
+  list-style: none;
+  padding: 30px;
+}
+.main_h1 {
+  padding: 30px;
+}
+.search_form {
+  padding: 30px;
+}
+/* .search_input{} */
+/* .search_btn {} */
+
+.search_list {
+  list-style: none;
+  padding: 30px;
+}
+/* .search_list--item{} */
