@@ -1,30 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import API from "../services/api";
 
 function Home() {
-  const [trendings, setTrendings] = useState([]);
-  //   const url =
-  //     "https://api.themoviedb.org/3/movie/popular?api_key=ae0cace2b608fa732224591b2c086b58&language=en-US&page=1";
-  const url =
-    "https://api.themoviedb.org/3/trending/movie/week?api_key=ae0cace2b608fa732224591b2c086b58";
+  const [movie, setMovie] = useState([]);
+
+  const { path, url } = useRouteMatch();
 
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
+    API.getTrending()
       .then((data) => {
-        setTrendings(data.results);
+        setMovie(data.results);
         console.log(data);
-      });
-    console.log(trendings);
+      })
+      .catch((error) => console.log(error));
   }, []);
+
   return (
     <div>
       <h1 className="main_h1">Trendings Today</h1>
       <ul className="film_list">
-        {trendings &&
-          trendings.map((trend) => (
-            <li>
-              <Link to="">{trend.original_title}</Link>
+        {movie &&
+          movie.map((mov) => (
+            <li key={mov.id}>
+              <Link to={`${url}movies/${mov.id}`}>{mov.original_title}</Link>
             </li>
           ))}
       </ul>

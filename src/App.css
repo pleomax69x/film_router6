@@ -8,7 +8,16 @@
 }
 /* .navBar_list--item {
 } */
-
+.navBar_list--link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  color: rgb(0, 89, 255);
+  font-size: 18px;
+}
+.navBar_list--link-active {
+  color: brown;
+}
 .film_list {
   list-style: none;
   padding: 30px;
@@ -27,3 +36,8 @@
   padding: 30px;
 }
 /* .search_list--item{} */
+
+.imgMainWrapper {
+  display: flex;
+  padding: 30px;
+}
