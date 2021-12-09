@@ -26,9 +26,9 @@ function App() {
         <Route path="/movies" exact>
           <FilmSearch />
         </Route>
-        <Route>
+        {/* <Route>
           <Home />
-        </Route>
+        </Route> */}
       </Switch>
       <ToastContainer />
     </div>

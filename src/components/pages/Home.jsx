@@ -11,7 +11,7 @@ function Home() {
     API.getTrending()
       .then((data) => {
         setMovie(data.results);
-        console.log(data);
+        // console.log(data);
       })
       .catch((error) => console.log(error));
   }, []);
