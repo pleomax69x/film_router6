@@ -40,4 +40,35 @@ const getMovieInfo = async (movie_id) => {
   }
 };
 
-export default { getTrending, movieSearch, getMovieInfo };
+const getMovieInfoCast = async (movie_id) => {
+  const movieID = `/movie/${movie_id}/credits?api_key=${apiKey}&language=en-US`;
+
+  try {
+    const response = await axios.get(movieID);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Something went wrong");
+  }
+};
+const getMovieInfoReviews = async (movie_id) => {
+  const movieID = `/movie/${movie_id}/reviews?api_key=${apiKey}&language=en-US`;
+
+  try {
+    const response = await axios.get(movieID);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Something went wrong");
+  }
+};
+
+const API = {
+  getTrending,
+  movieSearch,
+  getMovieInfo,
+  getMovieInfoCast,
+  getMovieInfoReviews,
+};
+
+export default API;

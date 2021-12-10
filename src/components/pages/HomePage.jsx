@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useRouteMatch, Switch, Route } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import API from "../services/api";
 
-function Home() {
+function HomePage() {
   const [movie, setMovie] = useState([]);
 
-  const { path, url } = useRouteMatch();
+  const { url } = useRouteMatch();
 
   useEffect(() => {
     API.getTrending()
@@ -31,4 +31,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;

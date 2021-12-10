@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import {
   Route,
   useRouteMatch,
-  Switch,
-  BrowserRouter,
-  Link,
+  NavLink,
+  useParams,
+  useHistory,
 } from "react-router-dom";
-import { NavLink, useParams } from "react-router-dom";
 
 import API from "../services/api";
 import CastPage from "./CastPage";
@@ -16,27 +15,31 @@ const FilmInfo = () => {
   const [movie, setMovie] = useState([]);
   const [load, setLoad] = useState(false);
   const { url, path } = useRouteMatch();
-  const match = useRouteMatch();
-  console.log(match, "match");
-  const params = useParams();
+
+  const history = useHistory();
+  const { movieId } = useParams();
   const imgUrl = "https://image.tmdb.org/t/p/original";
-  console.log(params, "params");
+
+  const handleClick = () => {
+    history.push("/");
+  };
 
   useEffect(() => {
-    API.getMovieInfo(params.movieId)
+    API.getMovieInfo(movieId)
       .then((data) => {
         setMovie(data);
         setLoad(true);
-        // console.log(data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [movieId]);
 
   return (
     <div>
       <h2>film info page</h2>
 
-      <button type="button">Go Back</button>
+      <button onClick={handleClick} type="button">
+        Go Back
+      </button>
       <div className="imgMainWrapper">
         <img src={imgUrl + movie.poster_path} alt="" width="200" />
         <div>
@@ -51,32 +54,24 @@ const FilmInfo = () => {
       </div>
       <div>
         <h5>Additional Info</h5>
-        {/* <BrowserRouter> */}
+
         <ul>
           <li>
-            <Link to={`${url}/cast`}>Cast</Link>
+            <NavLink to={`${url}/cast`}>Cast</NavLink>
           </li>
           <li>
-            <Link to={`${url}/reviews`}>Reviews</Link>
+            <NavLink to={`${url}/reviews`}>Reviews</NavLink>
           </li>
         </ul>
         <hr />
-        <Switch>
-          <Route exact path={`${path}/cast`}>
-            <CastPage />
-          </Route>
-          <Route path={`${path}/reviews`}>
-            <ReviewPage />
-          </Route>
-        </Switch>
 
-        {/* <Switch>
-            <Route path={`${url}/cast`} children={<CastPage />} />
-          </Switch> */}
-        {/* </BrowserRouter> */}
+        <Route exact path={`${path}/cast`}>
+          <CastPage />
+        </Route>
+        <Route path={`${path}/reviews`}>
+          <ReviewPage />
+        </Route>
       </div>
-
-      {/* <Route path="movies/:movieId/cast" component={<CastPage />} exact /> */}
     </div>
   );
 };
